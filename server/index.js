@@ -14,6 +14,9 @@ mongoose.connect(process.env.MONGO_URL, {
 })
     .then(() => {
         console.log(`DB Connection Succesfull`);
+    })
+    .catch((err) => {
+        console.log(err.message);
     });
     
 const server = app.listen(process.env.PORT, () => {
