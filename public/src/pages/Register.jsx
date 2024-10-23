@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import Logo from "../assets/logo.svg"
 
 function Register() {
     const handleSubmit = (event) => {
@@ -15,7 +16,7 @@ function Register() {
     <FormContainer>
         <form onSubmit={(event) => handleSubmit(event)}>
             <div className='brand'>
-                <img src="" alt='' />
+                <img src={Logo} alt='Logo' />
                 <h1>snappy</h1>
             </div>
                   <input
