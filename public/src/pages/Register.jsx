@@ -6,6 +6,9 @@ function Register() {
         event.preventDefault();
         alert("form");
     };
+
+    const handleChange = (event) => { }
+    
   return (
     <>
     <FormContainer>
@@ -14,7 +17,28 @@ function Register() {
                 <img src="" alt='' />
                 <h1>snappy</h1>
             </div>
-            <input type="text" placeholder="Username" name="username" />
+                  <input
+                      type="email"
+                      placeholder="Email"
+                      name="email"
+                      onChange={(e) => handleChange(e)}
+                  />
+                <input
+                      type="password"
+                      placeholder="Password"
+                      name="password"
+                      onChange={(e) => handleChange(e)}
+                  />
+                <input
+                      type="password"
+                      placeholder="Confirm Password"
+                      name="confirmPassword"
+                      onChange={(e) => handleChange(e)}
+                  />
+                  <button type="submit">Create User</button>
+                  <span>
+                      Already have an account? <link to="/login">Login</link>
+                  </span>
         </form>
     </FormContainer>
     </>
