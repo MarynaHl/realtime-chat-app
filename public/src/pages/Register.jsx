@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 function Register() {
     const handleSubmit = (event) => {
@@ -37,7 +38,7 @@ function Register() {
                   />
                   <button type="submit">Create User</button>
                   <span>
-                      Already have an account? <link to="/login">Login</link>
+                      Already have an account? <Link to="/login">Login</Link>
                   </span>
         </form>
     </FormContainer>
