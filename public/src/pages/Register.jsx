@@ -1,15 +1,23 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo.svg";
 
 function Register() {
+    const [values, setValues] = useState ({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+    })
     const handleSubmit = (event) => {
         event.preventDefault();
         alert("form");
     };
 
-    const handleChange = (event) => { }
+    const handleChange = (event) => {
+        setValues({ ...values, [event.target.name]: event.target.value });
+     }
     
   return (
     <>
@@ -19,6 +27,12 @@ function Register() {
                 <img src={Logo} alt='Logo' />
                 <h1>whisper</h1>
             </div>
+            <input
+                type="username"
+                placeholder="Username"
+                name="username"
+                onChange={(e) => handleChange(e)}
+            />
             <input
                 type="email"
                 placeholder="Email"
