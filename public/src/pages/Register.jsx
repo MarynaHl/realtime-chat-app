@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Logo from "../assets/logo.svg";
 import {ToastContainer, toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 function Register() {
     const [values, setValues] = useState ({
@@ -19,9 +20,12 @@ function Register() {
         draggable: true,
         theme: "dark",
     };
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        handleValidation();
+        if (handleValidation()) {
+        const { password, confirmPassword, username, email } = values;
+        const {data} = await axios.post()
+        }
     };
 
     const handleValidation = () => {
