@@ -19,7 +19,14 @@ function Register() {
     const handleValidation = () => {
         const { password, confirmPassword, username, email } = values;
         if(password !== confirmPassword) {
-            toast.error("password and confirm password should be same");
+            toast.error("password and confirm password should be same", {
+                position: "bottom-right",
+                autoClose: 8000,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "dark",
+            }
+            );
         }
     }
 
@@ -65,6 +72,7 @@ function Register() {
             </span>
         </form>
     </FormContainer>
+    <ToastContainer />
     </>
   );
 }
