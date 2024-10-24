@@ -115,9 +115,9 @@ const FormContainer = styled.div`
       text-transform: uppercase;
       a {
       color: #4e0eff;
-      text-transform: none;
+      text-decoration: none;
       font-weight: bold;
-      
+
       }
       }
   }
