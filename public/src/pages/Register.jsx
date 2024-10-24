@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo.svg";
+import {ToastContainer, toast} from "react-toastify";
 
 function Register() {
     const [values, setValues] = useState ({
@@ -14,6 +15,13 @@ function Register() {
         event.preventDefault();
         alert("form");
     };
+
+    const handleValidation = () => {
+        const { password, confirmPassword, username, email } = values;
+        if(password !== confirmPassword) {
+            toast.error("password and confirm password should be same");
+        }
+    }
 
     const handleChange = (event) => {
         setValues({ ...values, [event.target.name]: event.target.value });
