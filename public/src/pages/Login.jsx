@@ -8,7 +8,7 @@ import axios from "axios";
 import { loginRoute } from '../utils/APIRouters';
 
 function Login() {
-    const navigate = useNavigate;
+    const navigate = useNavigate();
     const [values, setValues] = useState({
         username: "",
         password: "",
