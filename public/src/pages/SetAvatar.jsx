@@ -11,10 +11,31 @@ export default function SetAvatar() {
 
     const api = "https://api.multiavatar.com/45678945";
     const navigate = useNavigate();
-
+    const [avatars, setAvatars] = useState([]);
+    const [isLoading, setIsloading] = useState(true);
+    const [selectedAvatar, setSelectedAvatar] = useState(undefined);
+    const toastOptions = {
+        position: "bottom-right",
+        autoClose: 8000,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+    };
   return (
     <>
-    <Container><h1>Set Avatar</h1></Container>
+    <Container>
+        <div className="title-container">
+            <h1>
+                Pick an avatar as your profile picture
+            </h1>
+        </div>
+        <div className="avatars">
+{
+
+}
+        </div>
+        
+        </Container>
     <ToastContainer />
     </>
   );
