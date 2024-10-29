@@ -1,7 +1,14 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from "styled-components";
+import axios from 'axios';
 
 function Chat() {
+  const [contacts, setContacts] = useState([]);
+  const [currentUser, setCurrentUser] = useState(undefined)
+  useEffect(()=>{},[])
+  useEffect(async()=> {
+    if()
+  },[])
   return (
   <Container>
   
