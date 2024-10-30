@@ -14,7 +14,36 @@ export default function Contacts({contacts, currentUser}) {
     },[currentUser]);
     const changeCurrentChat = (index, contact) => {
 
-    }
-  return <div>Contacts</div>
+  return <>
+  {
+    currentUserImage && currentUserName && (
+        <Container>
+            <div className='brand'>
+                <img src={Logo} alt='logo'/>
+                <h3>WHISPER</h3>
+            </div>
+            <div className="contacts">
+                {
+                    contacts.map((contact, index) => {
+                        return (
+                            <div className={`contact ${index === currentSelected ?"selected" : ""
+                            }`} 
+                            key={index}>
+                                <div className="avatar">
+                                <img src={`data:image/svg+xml;base64,${contact.avatarImage}`}
+                                alt="avatar"
+                                 />
+                                </div>
+                                
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        </Container>
+    )
+  }
+  </>
 }
 
+const Container = styled.div;
