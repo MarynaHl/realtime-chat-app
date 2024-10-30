@@ -34,7 +34,9 @@ export default function Contacts({contacts, currentUser}) {
                                 alt="avatar"
                                  />
                                 </div>
-                                
+                                <div className="username">
+<h3>{contact.username}</h3>
+                                </div>
                             </div>
                         )
                     })
