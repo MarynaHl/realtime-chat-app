@@ -56,7 +56,7 @@ module.exports.login = async (req, res, next) => {
 
 module.exports.setAvatar = async (req, res, next) => {
     try {
-        const userId = req.params.id;  // виправлено з parems на params
+        const userId = req.params.id;
         const avatarImage = req.body.image;
         const userData = await User.findByIdAndUpdate(userId, {
             isAvatarImageSet: true,
