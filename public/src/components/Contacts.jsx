@@ -8,7 +8,6 @@ export default function Contacts({ contacts, currentUser }) {
     const [currentSelected, setCurrentSelected] = useState(undefined);
 
     useEffect(() => {
-        console.log(contacts);
         if (currentUser) {
             setCurrentUserImage(currentUser.avatarImage);
             setCurrentUserName(currentUser.username);
