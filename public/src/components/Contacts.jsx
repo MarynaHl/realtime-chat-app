@@ -13,6 +13,7 @@ export default function Contacts({ contacts, currentUser }) {
             setCurrentUserName(currentUser.username);
         }
     }, [currentUser]);
+    
 
     const changeCurrentChat = (index, contact) => {
         setCurrentSelected(index);
