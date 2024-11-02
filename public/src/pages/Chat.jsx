@@ -11,41 +11,44 @@ function Chat() {
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentChat, setCurrentChat] = useState(undefined);
 
+  // Перевірка аутентифікації користувача
   useEffect(() => {
     const checkUser = async () => {
-      if (!localStorage.getItem('chat-app-user')) {
+      const storedUser = localStorage.getItem('chat-app-user');
+      if (!storedUser) {
         navigate('/login');
       } else {
-        setCurrentUser(await JSON.parse(localStorage.getItem("chat-app-user")));
+        setCurrentUser(JSON.parse(storedUser));
       }
     };
     checkUser();
   }, [navigate]);
 
+  // Завантаження контактів після перевірки поточного користувача
   useEffect(() => {
-    const fetchContacts = async () => {
-      if (currentUser) {
-        if (currentUser.isAvatarImageSet) {
+    if (currentUser) {
+      console.log("Current User:", currentUser); // Лог для перевірки
+      if (currentUser.isAvatarImageSet) {
+        const fetchContacts = async () => {
           const { data } = await axios.get(`${allUsersRoute}/${currentUser._id}`);
           setContacts(data);
-        } else {
-          navigate("/setAvatar");
-        }
+        };
+        fetchContacts();
+      } else {
+        navigate("/setAvatar");
       }
-    };
-    fetchContacts();
+    }
   }, [currentUser, navigate]);
 
   const handleChatChange = (chat) => {
-setCurrentChat(chat);
+    setCurrentChat(chat);
   };
 
   return (
     <Container>
       <div className="container">
-<Contacts contacts={contacts} currentUser={currentChat} changeChat={handleChatChange}
-/>
-</div>
+        <Contacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
+      </div>
     </Container>
   );
 }
