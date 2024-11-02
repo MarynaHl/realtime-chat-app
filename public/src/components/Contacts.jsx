@@ -47,6 +47,40 @@ export default function Contacts({ contacts, currentUser, changeChat}) {
                                 </div>
                             </div>
                         ))}
+                                                {contacts.map((contact, index) => (
+                            <div
+                                className={`contact ${index === currentSelected ? "selected" : ""}`}
+                                key={index}
+                                onClick={() => changeCurrentChat(index, contact)}
+                            >
+                                <div className="avatar">
+                                    <img
+                                        src={`data:image/svg+xml;base64,${contact.avatarImage}`}
+                                        alt="avatar"
+                                    />
+                                </div>
+                                <div className="username">
+                                    <h3>{contact.username}</h3>
+                                </div>
+                            </div>
+                        ))}
+                                                {contacts.map((contact, index) => (
+                            <div
+                                className={`contact ${index === currentSelected ? "selected" : ""}`}
+                                key={index}
+                                onClick={() => changeCurrentChat(index, contact)}
+                            >
+                                <div className="avatar">
+                                    <img
+                                        src={`data:image/svg+xml;base64,${contact.avatarImage}`}
+                                        alt="avatar"
+                                    />
+                                </div>
+                                <div className="username">
+                                    <h3>{contact.username}</h3>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                     <div className="current-user">
                         <div className="avatar">
@@ -56,7 +90,7 @@ export default function Contacts({ contacts, currentUser, changeChat}) {
                             />
                         </div>
                         <div className="username">
-                            <h1>{currentUserName}</h1>
+                            <h2>{currentUserName}</h2>
                         </div>
                     </div>
                 </Container>
