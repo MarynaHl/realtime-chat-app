@@ -47,7 +47,13 @@ function Chat() {
   return (
     <Container>
       <div className="container">
-        <Contacts contacts={contacts} currentUser={currentUser} changeChat={handleChatChange} />
+        <Contacts contacts={contacts}
+        currentUser={currentUser}
+        changeChat={handleChatChange}
+         />
+         <Welcome
+         currentUser={currentUser}
+         />
       </div>
     </Container>
   );
