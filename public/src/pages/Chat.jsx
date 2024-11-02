@@ -12,7 +12,6 @@ function Chat() {
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentChat, setCurrentChat] = useState(undefined);
 
-  // Перевірка аутентифікації користувача
   useEffect(() => {
     const checkUser = async () => {
       const storedUser = localStorage.getItem('chat-app-user');
@@ -25,10 +24,8 @@ function Chat() {
     checkUser();
   }, [navigate]);
 
-  // Завантаження контактів після перевірки поточного користувача
   useEffect(() => {
     if (currentUser) {
-      console.log("Current User:", currentUser); // Лог для перевірки
       if (currentUser.isAvatarImageSet) {
         const fetchContacts = async () => {
           const { data } = await axios.get(`${allUsersRoute}/${currentUser._id}`);
