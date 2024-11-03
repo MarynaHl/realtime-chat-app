@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export default function ChatContainer({ currentChat }) {
   return (
     <>
-      {currentChat && (
+      {currentChat && currentChat.avatarImage && (
         <Container>
           <div className="chat-header">
             <div className="user-details">
@@ -19,8 +19,6 @@ export default function ChatContainer({ currentChat }) {
               </div>
             </div>
           </div>
-          {/* <h1>Welcome, {currentUser && currentUser.username}!</h1>
-          <p>Select a chat to start messaging.</p> */}
           <div className="chat-messages"></div>
           <div className="chat-input"></div>
         </Container>
