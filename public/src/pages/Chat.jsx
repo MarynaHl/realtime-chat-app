@@ -12,7 +12,7 @@ function Chat() {
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentChat, setCurrentChat] = useState(undefined);
-  // const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const checkUser = async () => {
@@ -45,6 +45,8 @@ function Chat() {
   };
 
   return (
+    <>
+{
     <Container>
     <div className="container">
       <Contacts 
@@ -53,14 +55,16 @@ function Chat() {
         changeChat={handleChatChange}
       />
       {
-        currentChat === undefined ? (
+       isLoaded && currentChat === undefined ? (
           <Welcome currentUser={currentUser} />
         ) : (
           <ChatContainer currentUser={currentUser} />
-        )
-      }
+        )}
     </div>
   </Container>  
+      }
+    )
+    </>
   );
 }
 

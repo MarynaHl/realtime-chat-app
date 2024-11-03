@@ -1,17 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
+export default function ChatContainer({currentChat}) {
 
-function ChatContainer({ currentUser }) {
   return (
+    {currentChat && (
     <Container>
-      <h1>Welcome, {currentUser && currentUser.username}!</h1>
-      <p>Select a chat to start messaging.</p>
-      {/* Додайте потрібний JSX-код для вмісту чату */}
+<div className="chat-header">
+  <div className="user-details">
+    <div className="avatar">
+    <img
+src={`data:image/svg+xml;base64,${currentChat.avatarImage}`}
+alt="avatar"
+         />
+         <div className="username">
+      <h3>{currentChat.username}</h3>
+      </div>
+    </div>
+  </div>
+</div>
+      {/* <h1>Welcome, {currentUser && currentUser.username}!</h1>
+      <p>Select a chat to start messaging.</p> */}
+      <div className="chat-messages"></div>
+      <div className="chat-input"></div>
     </Container>
-  );
+  )}
 }
-
-export default ChatContainer;
 
 const Container = styled.div`
   height: 100%;
@@ -32,4 +45,4 @@ const Container = styled.div`
   p {
     font-size: 1.2rem;
   }
-`;
+`; 
