@@ -14,6 +14,7 @@ function Chat() {
   const [currentChat, setCurrentChat] = useState(undefined);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  // Використання useEffect для перевірки поточного користувача
   useEffect(() => {
     const checkUser = async () => {
       const storedUser = localStorage.getItem('chat-app-user');
@@ -26,12 +27,14 @@ function Chat() {
     checkUser();
   }, [navigate]);
 
+  // Перевірка, чи встановлений аватар у користувача, і завантаження контактів
   useEffect(() => {
     if (currentUser) {
       if (currentUser.isAvatarImageSet) {
         const fetchContacts = async () => {
           const { data } = await axios.get(`${allUsersRoute}/${currentUser._id}`);
           setContacts(data);
+          setIsLoaded(true); // Додано для позначення, що контакти завантажені
         };
         fetchContacts();
       } else {
@@ -46,21 +49,20 @@ function Chat() {
 
   return (
     <Container>
-    <div className="container">
-      <Contacts 
-        contacts={contacts}
-        currentUser={currentUser}
-        changeChat={handleChatChange}
-      />
-
-      {
-       isLoaded && currentChat === undefined ? (
+      <div className="container">
+        <Contacts 
+          contacts={contacts}
+          currentUser={currentUser}
+          changeChat={handleChatChange}
+        />
+        {/* Додано isLoaded для коректного рендеру Welcome компонента */}
+        {isLoaded && currentChat === undefined ? (
           <Welcome currentUser={currentUser} />
         ) : (
           <ChatContainer currentUser={currentUser} />
         )}
-    </div>
-  </Container>  
+      </div>
+    </Container>  
   );
 }
 

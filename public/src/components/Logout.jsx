@@ -1,21 +1,21 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { BiPowerOff } from "react-icons/bi";
 
-const Logout = () => {
+export default function Logout() {
   const navigate = useNavigate();
 
-  useEffect(() => {
-
-    localStorage.removeItem('chat-app-user');
-
+  const handleClick = () => {
+    localStorage.clear();
     navigate('/login');
-  }, [navigate]);
+  };
 
   return (
-    <div>
-      <h2>Logging out...</h2>
-    </div>
+    <Button onClick={handleClick}>
+      <BiPowerOff />
+    </Button>
   );
-};
+}
 
-export default Logout;
+const Button = styled.button``;
