@@ -1,50 +1,90 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import styled from "styled-components";
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { allUsersRoute } from '../utils/APIRouters';
+import Contacts from '../components/Contacts';
+import Welcome from '../components/Welcome';
+import ChatContainer from '../components/ChatContainer';
 
-export default function ChatContainer({ currentChat }) {
+function Chat() {
+  const navigate = useNavigate();
+  const [contacts, setContacts] = useState([]);
+  const [currentUser, setCurrentUser] = useState(undefined);
+  const [currentChat, setCurrentChat] = useState(undefined);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const storedUser = localStorage.getItem('chat-app-user');
+      if (!storedUser) {
+        navigate('/login');
+      } else {
+        setCurrentUser(JSON.parse(storedUser));
+      }
+    };
+    checkUser();
+  }, [navigate]);
+
+  useEffect(() => {
+    if (currentUser) {
+      if (currentUser.isAvatarImageSet) {
+        const fetchContacts = async () => {
+          const { data } = await axios.get(`${allUsersRoute}/${currentUser._id}`);
+          setContacts(data);
+        };
+        fetchContacts();
+      } else {
+        navigate("/setAvatar");
+      }
+    }
+  }, [currentUser, navigate]);
+
+  const handleChatChange = (chat) => {
+    setCurrentChat(chat);
+  };
+
   return (
-    <>
-      {currentChat && (
-        <Container>
-          <div className="chat-header">
-            <div className="user-details">
-              <div className="avatar">
-                <img
-                  src={`data:image/svg+xml;base64,${currentChat.avatarImage}`}
-                  alt="avatar"
-                />
-              </div>
-              <div className="username">
-                <h3>{currentChat.username}</h3>
-              </div>
-            </div>
-          </div>
-          <div className="chat-messages"></div>
-          <div className="chat-input"></div>
-        </Container>
-      )}
-    </>
+    <Container>
+      <div className="container">
+        <Contacts 
+          contacts={contacts}
+          currentUser={currentUser}
+          changeChat={handleChatChange}
+        />
+
+        {
+          isLoaded && currentChat === undefined ? (
+            <Welcome currentUser={currentUser} />
+          ) : (
+            <ChatContainer currentChat={currentChat} />
+          )}
+      </div>
+    </Container>  
   );
 }
 
 const Container = styled.div`
-  height: 100%;
+  height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  color: white;
-  background-color: #2a2a2a;
-  text-align: center;
-  padding: 1rem;
+  gap: 1rem;
+  align-items: center;
+  background-color: #131324;
 
-  h1 {
-    font-size: 2rem;
-    color: #4e0eff;
-  }
-
-  p {
-    font-size: 1.2rem;
+  .container {
+    height: 85vh;
+    width: 85vw;
+    background-color: #00000076;
+    display: grid;
+    grid-template-columns: 25% 75%;
+    
+    @media screen and (min-width: 720px) and (max-width: 1080px) {
+      grid-template-columns: 35% 65%;
+    }
   }
 `;
-   
+
+export default Chat;
