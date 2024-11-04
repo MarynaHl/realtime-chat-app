@@ -31,24 +31,41 @@ export default function ChatContainer({ currentChat }) {
 
 const Container = styled.div`
   padding-top: 1rem;
+
   .chat-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.2rem;
-  .user-details {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  .avatar: {
-  img {
-  height: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.2rem;
+
+    .user-details {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .avatar {
+        img {
+          height: 3rem;
+        }
+      }
+
+      .username {
+        h3 {
+          color: white;
+        }
+      }
+    }
   }
+  
+  .chat-messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    color: white;
   }
-  .username {
-  h3 {
-  color: white;
+
+  .chat-input {
+    padding: 1rem;
+    background-color: #2f2f2f;
   }
-  }
-  }}
 `;
