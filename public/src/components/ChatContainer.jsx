@@ -4,7 +4,7 @@ import styled from 'styled-components';
 export default function ChatContainer({ currentChat }) {
   return (
     <>
-      {currentChat && currentChat.avatarImage && (
+      {currentChat && (
         <Container>
           <div className="chat-header">
             <div className="user-details">
@@ -47,3 +47,4 @@ const Container = styled.div`
     font-size: 1.2rem;
   }
 `;
+   
