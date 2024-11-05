@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Logout from './Logout';
+import ChatInput from "./ChatInput";
 
 export default function ChatContainer({ currentChat }) {
   const handleSendMsg = async (msg) => {};
