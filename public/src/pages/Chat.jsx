@@ -23,7 +23,7 @@ function Chat() {
         setCurrentUser(JSON.parse(storedUser));
       }
     };
-    checkUser();
+    checkUser(); 
   }, [navigate]);
 
   useEffect(() => {
