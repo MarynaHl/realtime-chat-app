@@ -1,10 +1,9 @@
-const { register, login, setAvatar, getAllUsers } = require("../controllers/userController");
+const { addMessage, getMessages } = require("../controllers/messageController");
+const { register, login, setAvatar, getAllUsers } = require("../controllers/messagesController");
 
 const router = require("express").Router();
 
-router.post("/register", register);
-router.post("/login", login);
-router.post("/setAvatar/:id", setAvatar);
-router.get("/allusers/:id", getAllUsers);
+router.post("/addmsg", addMessage);
+router.post("/getmsg", getMessages);
 
 module.exports = router;
