@@ -2,12 +2,13 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import ChatInput from "./ChatInput";
 import Logout from "./Logout";
+import Messages from "./Messages"
 import axios from "axios";
 import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
 
 export default function ChatContainer({ currentChat }) {
   const handleSendMsg = async (msg) => {
-    alert(msg);
+    
   };
   return (
     <>
