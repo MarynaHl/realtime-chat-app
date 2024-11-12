@@ -32,7 +32,7 @@ await axios.post(sendMessageRoute, {
             </div>
             <Logout />
           </div>
-          <div className="chat-messages"></div>
+          <Messages />
           <ChatInput handleSendMsg={handleSendMsg} />
         </Container>
       )}
