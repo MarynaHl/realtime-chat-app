@@ -13,7 +13,8 @@ export default function ChatInput() {
   };
 
   const handleEmojiClick = (event, emoji) => {
-let message = msg;
+// console.log(emoji);
+    let message = msg;
 message += emoji.emoji;
 setMsg(message);
   };
@@ -66,28 +67,41 @@ const Container = styled.div`
       .emoji-picker-react {
         position: absolute;
 top: -350px;
+background-color: #080420;
+box-shadow: 0 5px 10px #9a86f3;
+border-color: #9186f3; 
 
-        .emoji-scroll-wrapper::-webkit-scrollbar {
-          background-color: #27293d;
-          width: 5px;
-        }
+.emoji-categories {
+button {
+filter: contrast(0);
+}
+}
 
-        .emoji-scroll-wrapper::-webkit-scrollbar-thumb {
-          background-color: #44475a;
-        }
+.emoji-search {
+background-color: transparent;
+border-color: #9186f3;
+}
+        // .emoji-scroll-wrapper::-webkit-scrollbar {
+        //   background-color: #27293d;
+        //   width: 5px;
+        // }
 
-        .emoji-categories button {
-          filter: contrast(0);
-        }
+        // .emoji-scroll-wrapper::-webkit-scrollbar-thumb {
+        //   background-color: #44475a;
+        // }
 
-        .emoji-search {
-          background-color: #44475a;
-          border-color: #f1c40f;
-        }
+        // .emoji-categories button {
+        //   filter: contrast(0);
+        // }
 
-        .emoji-group:before {
-          background-color: #27293d;
-        }
+        // .emoji-search {
+        //   background-color: #44475a;
+        //   border-color: #f1c40f;
+        // }
+
+        // .emoji-group:before {
+        //   background-color: #27293d;
+        // }
       }
     }
   }
