@@ -42,33 +42,30 @@ setMsg(message);
 
 const Container = styled.div`
   display: grid;
+  grid-template-colums: 5% 95%;
   align-items: center;
-  padding: 1rem;
-  background-color: #2b2b41;
-  position: relative;
+  padding: 0 2rem;
+  background-color: #080420;
+ padding-bottom: 0.3rem;
 
   .button-container {
     display: flex;
     align-items: center;
     color: white;
-    margin-right: 1rem;
+    gap: 1rem;
 
     .emoji {
       position: relative;
 
       svg {
         font-size: 1.5rem;
-        color: #f1c40f;
+        color: #ffff00c8;
         cursor: pointer;
       }
 
       .emoji-picker-react {
         position: absolute;
-        bottom: 50px;
-        background-color: #27293d;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-        border-color: #44475a;
-        border-radius: 0.5rem;
+top: -350px;
 
         .emoji-scroll-wrapper::-webkit-scrollbar {
           background-color: #27293d;
