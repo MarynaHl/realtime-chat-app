@@ -107,12 +107,13 @@ border-color: #9186f3;
   }
 
   .input-container {
-    display: flex;
+  width: 100%;
+  border-radius: 2rem;  
+  display: flex;
     align-items: center;
     background-color: #44475a;
-    border-radius: 1.5rem;
-    padding: 0.5rem 1rem;
-    width: 100%;
+gap: 2rem;
+    
 
     input {
       flex: 1;
