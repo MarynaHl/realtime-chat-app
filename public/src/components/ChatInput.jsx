@@ -4,7 +4,7 @@ import { IoMdSend } from "react-icons/io";
 import styled from "styled-components";
 import Picker from "emoji-picker-react";
 
-export default function ChatInput() {
+export default function ChatInput(handleSendMsg) {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [msg, setMsg] = useState("");
 
@@ -18,6 +18,14 @@ export default function ChatInput() {
 message += emoji.emoji;
 setMsg(message);
   };
+
+  const sendChat = (event) => {
+    event.preventDefault();
+    if(msg.length>0) {
+      handleSendMsg(msg);
+      setMsg(``);
+    }
+  }
 
   return (
     <Container>
@@ -81,28 +89,32 @@ filter: contrast(0);
 background-color: transparent;
 border-color: #9186f3;
 }
-        // .emoji-scroll-wrapper::-webkit-scrollbar {
-        //   background-color: #27293d;
-        //   width: 5px;
-        // }
+        .emoji-scroll-wrapper::-webkit-scrollbar {
+          background-color: #080420;
+          width: 5px;
+          &-thumb {
+          background-color: #9186f3;
+          }
+        }
 
-        // .emoji-scroll-wrapper::-webkit-scrollbar-thumb {
-        //   background-color: #44475a;
-        // }
+.emoji-categories {
+        button {
+          filter: contrast(0);
+        }
+}
 
-        // .emoji-categories button {
-        //   filter: contrast(0);
-        // }
 
-        // .emoji-search {
-        //   background-color: #44475a;
-        //   border-color: #f1c40f;
-        // }
+.emoji-search {
+    background-color: transpatent;
+    border-color: #9186f3;
+  }
 
-        // .emoji-group:before {
-        //   background-color: #27293d;
-        // }
-      }
+      .emoji-group:before {
+ background-color: #080420;
+ }
+}
+
+
     }
   }
 
