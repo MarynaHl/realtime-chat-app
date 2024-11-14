@@ -35,7 +35,7 @@ setMsg(message);
           {showEmojiPicker && <Picker onEmojiClick={handleEmojiClick} />}
         </div>
       </div>
-      <form className="input-container">
+      <form className="input-container" onSubmit={(e) => sendChat(e)}>
         <input
           type="text"
           placeholder="Message..." />
@@ -120,43 +120,43 @@ border-color: #9186f3;
 
   .input-container {
   width: 100%;
+    background-color: #ffffff34;
+
   border-radius: 2rem;  
   display: flex;
     align-items: center;
-    background-color: #44475a;
 gap: 2rem;
     
-
     input {
-      flex: 1;
-      background-color: transparent;
-      border: none;
-      color: #f8f8f2;
-      font-size: 1rem;
-      padding-left: 0.5rem;
-
-      &::placeholder {
-        color: #8d8d8d;
-      }
-
+width: 90%;
+height: 60%;
+background-color: transparent;
+color: white;
+border: none;
+      padding-left: 1rem;
+      font-size: 1.2rem;
+&::selection {
+  background-color: #9186f3;
+}
       &:focus {
         outline: none;
       }
+
+
     }
 
     button {
-      background-color: #f1c40f;
-      border: none;
-      border-radius: 50%;
-      padding: 0.5rem;
+      border-radius: 2rem;
+      padding: 0.3rem 2rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      cursor: pointer;
+  background-color: #9a86f3;
+  border: none;
 
       svg {
-        font-size: 1.2rem;
-        color: #2b2b41;
+        font-size: 2rem;
+        color: white;
       }
     }
   }
