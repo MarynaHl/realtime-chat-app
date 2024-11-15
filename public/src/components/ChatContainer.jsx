@@ -14,8 +14,8 @@ useEffect(async () => {
     from: currentUser._id,
     to: currentChat._id,
   });
-  
-})
+  setMessasge(response.data);
+},[currentChat]);
 
   const handleSendMsg = async (msg) => {
 await axios.post(sendMessageRoute, {
