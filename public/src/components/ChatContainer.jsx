@@ -14,7 +14,7 @@ useEffect(async () => {
     from: currentUser._id,
     to: currentChat._id,
   });
-  setMessasge(response.data);
+  s(response.data);
 },[currentChat]);
 
   const handleSendMsg = async (msg) => {
