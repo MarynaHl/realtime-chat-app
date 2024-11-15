@@ -17,11 +17,11 @@ module.exports.addMessage = async (req, res, next) => {
   }
 };
 
-module.exports.getMessages = async (req, res, next) => {
+module.exports.getAllMessages = async (req, res, next) => {
   try {
     const { from, to } = req.body;
 
-    const messages = await Messages.find({
+    const messages = await messageModel.find({
       users: {
         $all: [from, to],
       },
