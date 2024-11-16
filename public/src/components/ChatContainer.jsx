@@ -2,28 +2,33 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ChatInput from "./ChatInput";
 import Logout from "./Logout";
-import Messages from "./Messages"
+import Messages from "./Messages";
 import axios from "axios";
-import { sendMessageRoute } from "../utils/APIRouters";
+import { sendMessageRoute, getAllMessagesRoute } from "../utils/APIRouters";
 
 export default function ChatContainer({ currentChat, currentUser }) {
- const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState([]);
 
-useEffect(async () => {
-  const response = await axious.post(getAllMessagesRoute, {
-    from: currentUser._id,
-    to: currentChat._id,
-  });
-  setMessages(response.data);
-},[currentChat]);
+  useEffect(() => {
+    const fetchMessages = async () => {
+      const response = await axios.post(getAllMessagesRoute, {
+        from: currentUser._id,
+        to: currentChat._id,
+      });
+      setMessages(response.data);
+    };
+
+    fetchMessages();
+  }, [currentChat, currentUser._id]);
 
   const handleSendMsg = async (msg) => {
-await axios.post(sendMessageRoute, {
-  from: currentUser._id,
-  to: currentChat._id,
-  message: msg,
-})
+    await axios.post(sendMessageRoute, {
+      from: currentUser._id,
+      to: currentChat._id,
+      message: msg,
+    });
   };
+
   return (
     <>
       {currentChat && (
@@ -44,24 +49,16 @@ await axios.post(sendMessageRoute, {
           </div>
 
           <div className="chat-messages">
-
-{
-  messages.map((message) => {
-    return (
-      <div>
-      <div className={`message ${message.fromSelf ? "sended":"recieved"}`}>
-      <div className="content">
-        <p>
-          {message.message}
-        </p>
-        </div>
-      </div>
-      </div>
-    );
-  })}
-
+            {messages.map((message) => {
+              return (
+                <div key={message._id} className={`message ${message.fromSelf ? "sended" : "recieved"}`}>
+                  <div className="content">
+                    <p>{message.message}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-
 
           <ChatInput handleSendMsg={handleSendMsg} />
         </Container>
@@ -71,57 +68,67 @@ await axios.post(sendMessageRoute, {
 }
 
 const Container = styled.div`
-padding-top: 1rem;
-.chat-header {
-display: flex;
-align-items: center;
-padding: 0 2rem;
-.user-details {
-display: flex;
-align-items: center;
-gap: 1rem;
-.avatar {
-img {
-height: 3rem;
-}
-}
-.username {
-h3 {
-color: white;
-}
-}
-}
-}
-.chat-messages {
-padding: 1rem 2rem;
-display: flex;
-flex-direction: column;
-gap: 1rem;
-overflow: auto;
-.message {
-display: flex;
-align-items: center;
-.content {
-max-width: 40%;
-overflow-wrap: break-word;
-padding: 1rem;
-font-size: 1.1rem;
-border-radius: 1rem;
-color: #d1d1d1;
-}
-}
-.sended {
-justify-content: flex-end;
-.content {
-background-color: #4f04ff21;
-}
-}
-.recieved {
-justify-content: flex-start;
-.content {
-background-color: #9900ff20;
-}
-}
+  padding-top: 1rem;
 
-}
+  .chat-header {
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+
+    .user-details {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      .avatar {
+        img {
+          height: 3rem;
+        }
+      }
+
+      .username {
+        h3 {
+          color: white;
+        }
+      }
+    }
+  }
+
+  .chat-messages {
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: auto;
+
+    .message {
+      display: flex;
+      align-items: center;
+
+      .content {
+        max-width: 40%;
+        overflow-wrap: break-word;
+        padding: 1rem;
+        font-size: 1.1rem;
+        border-radius: 1rem;
+        color: #d1d1d1;
+      }
+    }
+
+    .sended {
+      justify-content: flex-end;
+
+      .content {
+        background-color: #4f04ff21;
+      }
+    }
+
+    .recieved {
+      justify-content: flex-start;
+
+      .content {
+        background-color: #9900ff20;
+      }
+    }
+  }
 `;
