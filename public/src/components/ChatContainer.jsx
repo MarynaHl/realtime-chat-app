@@ -73,6 +73,9 @@ export default function ChatContainer({ currentChat, currentUser }) {
 const Container = styled.div`
   padding-top: 1rem;
   display: grid;
+  grid-template-rows: 10% 78% 15%;
+  gap: 0.1rem;
+  overflow: hidden;
 
   .chat-header {
     display: flex;
