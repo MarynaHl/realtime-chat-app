@@ -10,23 +10,26 @@ export default function ChatContainer({ currentChat, currentUser }) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    const fetchMessages = async () => {
-      const response = await axios.post(getAllMessagesRoute, {
-        from: currentUser._id,
-        to: currentChat._id,
-      });
-      setMessages(response.data);
-    };
-
-    fetchMessages();
-  }, [currentChat, currentUser._id]);
+    if (currentUser && currentChat) {
+      const fetchMessages = async () => {
+        const response = await axios.post(getAllMessagesRoute, {
+          from: currentUser._id,
+          to: currentChat._id,
+        });
+        setMessages(response.data);
+      };
+      fetchMessages();
+    }
+  }, [currentChat, currentUser]);
 
   const handleSendMsg = async (msg) => {
-    await axios.post(sendMessageRoute, {
-      from: currentUser._id,
-      to: currentChat._id,
-      message: msg,
-    });
+    if (currentUser && currentChat) {
+      await axios.post(sendMessageRoute, {
+        from: currentUser._id,
+        to: currentChat._id,
+        message: msg,
+      });
+    }
   };
 
   return (
@@ -69,6 +72,7 @@ export default function ChatContainer({ currentChat, currentUser }) {
 
 const Container = styled.div`
   padding-top: 1rem;
+  display: grid;
 
   .chat-header {
     display: flex;
