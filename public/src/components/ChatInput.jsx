@@ -82,15 +82,20 @@ const Container = styled.div`
         .emoji-scroll-wrapper::-webkit-scrollbar {
           background-color: #080420;
           width: 5px;
-        }
-
-        .emoji-scroll-wrapper::-webkit-scrollbar-thumb {
+          &-thumb {
           background-color: #9186f3;
+          }
         }
 
-        .emoji-categories button {
+        // .emoji-scroll-wrapper::-webkit-scrollbar-thumb {
+        //   background-color: #9186f3;
+        // }
+
+        .emoji-categories {
+        button {
           filter: contrast(0);
         }
+}
 
         .emoji-search {
           background-color: transparent;
@@ -114,7 +119,7 @@ const Container = styled.div`
 
     input {
       width: 90%;
-      height: 60%;
+      // height: 60%;
       background-color: transparent;
       color: white;
       border: none;
