@@ -14,7 +14,7 @@ useEffect(async () => {
     from: currentUser._id,
     to: currentChat._id,
   });
-  s(response.data);
+  setMessages(response.data);
 },[currentChat]);
 
   const handleSendMsg = async (msg) => {
@@ -42,7 +42,27 @@ await axios.post(sendMessageRoute, {
             </div>
             <Logout />
           </div>
-          <Messages />
+
+          <div className="chat-messages">
+
+{
+  messages.map((message) => {
+    return (
+      <div>
+      <div className={`message ${message.fromSelf ? "sended":"recieved"}`}>
+      <div className="content">
+        <p>
+          {message.message}
+        </p>
+        </div>
+      </div>
+      </div>
+    );
+  })}
+
+          </div>
+
+
           <ChatInput handleSendMsg={handleSendMsg} />
         </Container>
       )}
