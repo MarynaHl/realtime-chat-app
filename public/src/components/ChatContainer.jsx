@@ -6,7 +6,7 @@ import Messages from "./Messages";
 import axios from "axios";
 import { sendMessageRoute, getAllMessagesRoute } from "../utils/APIRouters";
 
-export default function ChatContainer({ currentChat, currentUser }) {
+export default function ChatContainer({ currentChat, currentUser, socket }) {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
@@ -27,6 +27,11 @@ export default function ChatContainer({ currentChat, currentUser }) {
       await axios.post(sendMessageRoute, {
         from: currentUser._id,
         to: currentChat._id,
+        message: msg,
+      });
+      socket.current.emit("send-msg", {
+        to: currentChat._id,
+        from: currentUser._id,
         message: msg,
       });
     }
