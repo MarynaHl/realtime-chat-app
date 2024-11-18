@@ -65,7 +65,11 @@ useEffect(() => {
         {isLoaded && currentChat === undefined ? (
           <Welcome currentUser={currentUser} />
         ) : (
-          <ChatContainer currentChat={currentChat} currentUser={currentUser} />
+          <ChatContainer 
+          currentChat={currentChat}
+          currentUser={currentUser}
+          socket={socket}
+          />
         )}
       </div>
     </Container>  
