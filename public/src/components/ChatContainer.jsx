@@ -9,6 +9,7 @@ import { sendMessageRoute, getAllMessagesRoute } from "../utils/APIRouters";
 export default function ChatContainer({ currentChat, currentUser, socket }) {
   const [messages, setMessages] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState(null);
+  scrollRef = useRef();
 
   useEffect(() => {
     if (currentUser && currentChat) {
@@ -54,6 +55,9 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
     arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage]);
 
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behaviour: "smooth" });
+  }, [messages]);
 
 
   return (
