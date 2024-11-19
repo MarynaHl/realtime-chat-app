@@ -9,7 +9,7 @@ import { sendMessageRoute, getAllMessagesRoute } from "../utils/APIRouters";
 export default function ChatContainer({ currentChat, currentUser, socket }) {
   const [messages, setMessages] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState(null);
-  scrollRef = useRef();
+  const scrollRef = useRef();
 
   useEffect(() => {
     if (currentUser && currentChat) {
