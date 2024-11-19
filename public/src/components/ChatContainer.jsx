@@ -8,6 +8,7 @@ import { sendMessageRoute, getAllMessagesRoute } from "../utils/APIRouters";
 
 export default function ChatContainer({ currentChat, currentUser, socket }) {
   const [messages, setMessages] = useState([]);
+  const [arrivalMessage, setArrivalMessage] = useState(null);
 
   useEffect(() => {
     if (currentUser && currentChat) {
@@ -40,6 +41,18 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
       setMessages(msgs);
     }
   };
+
+  useEffect(() => {
+    if (socket.current) {
+      socket.current.on("msg-recieve", (msg) => {
+        setArrivalMessage({ fromSelf: false, message: msg });
+      });
+    }
+  }, []);
+
+
+
+
 
   return (
     <>
