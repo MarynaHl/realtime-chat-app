@@ -10,6 +10,7 @@ import { io } from "socket.io-client";
 
 function Chat() {
   const socket = useRef();
+  const host = "http://localhost:5000";
   const navigate = useNavigate();
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
