@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ChatInput from "./ChatInput";
 import Logout from "./Logout";
@@ -9,7 +9,7 @@ import { sendMessageRoute, getAllMessagesRoute } from "../utils/APIRouters";
 export default function ChatContainer({ currentChat, currentUser, socket }) {
   const [messages, setMessages] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState(null);
-  const scrollRef = useRef();
+const scrollRef = useRef();
 
   useEffect(() => {
     if (currentUser && currentChat) {
