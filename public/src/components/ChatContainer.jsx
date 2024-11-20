@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import ChatInput from "./ChatInput";
 import Logout from "./Logout";
-import Messages from "./Messages";
 import axios from "axios";
 import { sendMessageRoute, getAllMessagesRoute } from "../utils/APIRouters";
+import { v4 as uuidv4 } from "uuid";
 
 export default function ChatContainer({ currentChat, currentUser, socket }) {
   const [messages, setMessages] = useState([]);
@@ -82,12 +82,18 @@ const scrollRef = useRef();
           <div className="chat-messages">
             {messages.map((message) => {
               return (
-                <div key={message._id} className={`message ${message.fromSelf ? "sended" : "recieved"}`}>
-                  <div className="content">
-                    <p>{message.message}</p>
-                  </div>
-                </div>
-              );
+<div ref={scrollRef} key={uuidv4()}>
+<div 
+   className={`message ${
+    message.fromSelf ? "sended" : "recieved"
+   }`}
+   >
+    <div className="content">
+      <p>{message.message}</p>
+    </div>
+   </div>
+</div>
+ );
             })}
           </div>
 
