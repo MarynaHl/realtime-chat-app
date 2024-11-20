@@ -11,18 +11,27 @@ export default function ChatContainer({ currentChat, currentUser, socket }) {
   const [arrivalMessage, setArrivalMessage] = useState(null);
 const scrollRef = useRef();
 
-  useEffect(() => {
-    if (currentUser && currentChat) {
-      const fetchMessages = async () => {
-        const response = await axios.post(getAllMessagesRoute, {
-          from: currentUser._id,
-          to: currentChat._id,
-        });
-        setMessages(response.data);
-      };
-      fetchMessages();
-    }
-  }, [currentChat, currentUser]);
+useEffect(async () => {
+  if (currentChat) {
+    const response = await axious.post(getAllMessagesRoute, {
+      from: currentUser._id,
+      to: currentChat._id,
+    });
+    setMessages(response.data);
+  }
+}, [currentChat]);
+  // useEffect(() => {
+  //   if (currentUser && currentChat) {
+  //     const fetchMessages = async () => {
+  //       const response = await axios.post(getAllMessagesRoute, {
+  //         from: currentUser._id,
+  //         to: currentChat._id,
+  //       });
+  //       setMessages(response.data);
+  //     };
+  //     fetchMessages();
+  //   }
+  // }, [currentChat, currentUser]);
 
   const handleSendMsg = async (msg) => {
     if (currentUser && currentChat) {
