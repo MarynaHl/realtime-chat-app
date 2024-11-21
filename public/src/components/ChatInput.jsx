@@ -12,16 +12,15 @@ export default function ChatInput({ handleSendMsg }) {
     setShowEmojiPicker(!showEmojiPicker);
   };
 
-  const handleEmojiClick = (event, emoji) => {
-    console.log(emoji);
-    let message = msg;
-    message += emoji.emoji;
-    setMsg(message);
+  const handleEmojiClick = (event, emojiObject) => {
+    if (emojiObject && emojiObject.emoji) {
+      setMsg((prevMsg) => prevMsg + emojiObject.emoji);
+    }
   };
 
   const sendChat = (event) => {
     event.preventDefault();
-    if (msg.length > 0) {
+    if (msg.trim().length > 0) {
       handleSendMsg(msg);
       setMsg("");
     }
@@ -49,6 +48,7 @@ export default function ChatInput({ handleSendMsg }) {
     </Container>
   );
 }
+
 
 const Container = styled.div`
   display: grid;
@@ -119,6 +119,7 @@ const Container = styled.div`
     gap: 2rem;
 
     input {
+    font-family: Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji";
       width: 90%;
       // height: 60%;
       background-color: transparent;
