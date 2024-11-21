@@ -13,7 +13,7 @@ const scrollRef = useRef();
 
 useEffect(async () => {
   if (currentChat) {
-    const response = await axious.post(getAllMessagesRoute, {
+    const response = await axios.post(getAllMessagesRoute, {
       from: currentUser._id,
       to: currentChat._id,
     });
