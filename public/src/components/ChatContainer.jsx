@@ -9,29 +9,21 @@ import { v4 as uuidv4 } from "uuid";
 export default function ChatContainer({ currentChat, currentUser, socket }) {
   const [messages, setMessages] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState(null);
-const scrollRef = useRef();
+  const scrollRef = useRef();
 
-useEffect(async () => {
-  if (currentChat) {
-    const response = await axios.post(getAllMessagesRoute, {
-      from: currentUser._id,
-      to: currentChat._id,
-    });
-    setMessages(response.data);
-  }
-}, [currentChat]);
-  // useEffect(() => {
-  //   if (currentUser && currentChat) {
-  //     const fetchMessages = async () => {
-  //       const response = await axios.post(getAllMessagesRoute, {
-  //         from: currentUser._id,
-  //         to: currentChat._id,
-  //       });
-  //       setMessages(response.data);
-  //     };
-  //     fetchMessages();
-  //   }
-  // }, [currentChat, currentUser]);
+  useEffect(() => {
+    const fetchMessages = async () => {
+      if (currentChat) {
+        const response = await axios.post(getAllMessagesRoute, {
+          from: currentUser._id,
+          to: currentChat._id,
+        });
+        setMessages(response.data);
+      }
+    };
+
+    fetchMessages();
+  }, [currentChat, currentUser]);
 
   const handleSendMsg = async (msg) => {
     if (currentUser && currentChat) {
@@ -40,6 +32,7 @@ useEffect(async () => {
         to: currentChat._id,
         message: msg,
       });
+
       socket.current.emit("send-msg", {
         to: currentChat._id,
         from: currentUser._id,
@@ -54,20 +47,29 @@ useEffect(async () => {
 
   useEffect(() => {
     if (socket.current) {
-      socket.current.on("msg-recieve", (msg) => {
+      const handleMessage = (msg) => {
         setArrivalMessage({ fromSelf: false, message: msg });
-      });
-    }
-  }, []);
+      };
 
-  useEffect(()=> {
-    arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
+      socket.current.on("msg-recieve", handleMessage);
+
+      return () => {
+        if (socket.current.off) {
+          socket.current.off("msg-recieve", handleMessage);
+        }
+      };
+    }
+  }, [socket]);
+
+  useEffect(() => {
+    if (arrivalMessage) {
+      setMessages((prev) => [...prev, arrivalMessage]);
+    }
   }, [arrivalMessage]);
 
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behaviour: "smooth" });
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
-
 
   return (
     <>
@@ -91,18 +93,18 @@ useEffect(async () => {
           <div className="chat-messages">
             {messages.map((message) => {
               return (
-<div ref={scrollRef} key={uuidv4()}>
-<div 
-   className={`message ${
-    message.fromSelf ? "sended" : "recieved"
-   }`}
-   >
-    <div className="content">
-      <p>{message.message}</p>
-    </div>
-   </div>
-</div>
- );
+                <div ref={scrollRef} key={uuidv4()}>
+                  <div
+                    className={`message ${
+                      message.fromSelf ? "sended" : "recieved"
+                    }`}
+                  >
+                    <div className="content">
+                      <p>{message.message}</p>
+                    </div>
+                  </div>
+                </div>
+              );
             })}
           </div>
 
