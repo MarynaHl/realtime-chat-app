@@ -9,15 +9,17 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
 
     useEffect(() => {
         if (currentUser) {
-            setCurrentUserImage(currentUser.avatarImage);
-            setCurrentUserName(currentUser.username);
+            const { avatarImage, username } = currentUser;
+            setCurrentUserImage(avatarImage);
+            setCurrentUserName(username);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentUser]);
 
     const changeCurrentChat = (index, contact) => {
         setCurrentSelected(index);
-        changeChat(contact);
+        if (typeof changeChat === "function") {
+            changeChat(contact);
+        }
     };
 
     return (
@@ -29,23 +31,28 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
                         <h3>WHISPER</h3>
                     </div>
                     <div className="contacts">
-                        {contacts.map((contact, index) => (
-                            <div
-                                className={`contact ${index === currentSelected ? "selected" : ""}`}
-                                key={index}
-                                onClick={() => changeCurrentChat(index, contact)}
-                            >
-                                <div className="avatar">
-                                    <img
-                                        src={`data:image/svg+xml;base64,${contact.avatarImage}`}
-                                        alt="avatar"
-                                    />
+                        {contacts && contacts.length > 0 ? (
+                            contacts.map((contact, index) => (
+                                <div
+                                    className={`contact ${index === currentSelected ? "selected" : ""}`}
+                                    key={contact.id || index}
+                                    onClick={() => changeCurrentChat(index, contact)}
+                                >
+                                    <div className="avatar">
+                                        <img
+                                            src={`data:image/svg+xml;base64,${contact.avatarImage || ''}`}
+                                            alt="avatar"
+                                            onError={(e) => { e.target.src = 'defaultAvatarPath'; }}
+                                        />
+                                    </div>
+                                    <div className="username">
+                                        <h3>{contact.username}</h3>
+                                    </div>
                                 </div>
-                                <div className="username">
-                                    <h3>{contact.username}</h3>
-                                </div>
-                            </div>
-                        ))}
+                            ))
+                        ) : (
+                            <div className="no-contacts">No contacts available</div>
+                        )}
                     </div>
                     <div className="current-user">
                         <div className="avatar">
@@ -63,6 +70,7 @@ export default function Contacts({ contacts, currentUser, changeChat }) {
         </>
     );
 }
+
 
 const Container = styled.div`
   display: grid;
