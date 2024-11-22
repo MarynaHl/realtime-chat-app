@@ -46,7 +46,7 @@ socket.on("add-user", (userId) => {
 socket.on("send-msg",(data)=> {
     const sendUserSocket = onlineUsers.get(data.to);
     if (sendUserSocket) {
-        socket.to(sendUserSocket).emit("msg-receive", data.msg);
+        socket.to(sendUserSocket).emit("msg-receive", data.message);
     }
 });
 });
