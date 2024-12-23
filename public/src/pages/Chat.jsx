@@ -29,12 +29,13 @@ function Chat() {
     checkUser(); 
   }, [navigate]);
 
-useEffect(() => {
-  if (currentUser) {
-    socket.current = io(host);
-    socket.current.emit("add-user", currentUser._id);
-  }
-},[currentUser]);
+  useEffect(() => {
+    if (currentUser) {
+      console.log("Current user: ", currentUser); // Доданий лог для діагностики
+      socket.current = io(host);
+      socket.current.emit("add-user", currentUser._id);
+    }
+  }, [currentUser]);
 
   useEffect(() => {
     if (currentUser) {
@@ -67,9 +68,9 @@ useEffect(() => {
           <Welcome currentUser={currentUser} />
         ) : (
           <ChatContainer 
-          currentChat={currentChat}
-          currentUser={currentUser}
-          socket={socket}
+            currentChat={currentChat}
+            currentUser={currentUser}
+            socket={socket}
           />
         )}
       </div>
@@ -90,7 +91,7 @@ const Container = styled.div`
   .container {
     height: 85vh;
     width: 85vw;
-    background-color: #00000076;
+    background-color: #1a1a2e; /* Зміна кольору */
     display: grid;
     grid-template-columns: 25% 75%;
     
